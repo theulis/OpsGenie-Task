@@ -1,6 +1,8 @@
 import requests
 import json
 
+## Get the overall system status through the API
+
 url = "https://opsgenie.status.atlassian.com/api/v2/status.json"
 
 payload={}
@@ -8,10 +10,14 @@ headers = {}
 
 response = requests.request("GET", url, headers=headers, data=payload)
 
+## Get only the specific information about the current status and print
+
 dictionary1=json.loads(response.text)
 
 print("Current system status: ",end='')
 print(dictionary1['status']['description'])
+
+## Get all the incidents through the API
 
 url = "https://opsgenie.status.atlassian.com/api/v2/incidents.json"
 
@@ -24,6 +30,8 @@ dictionary2=json.loads(response2.text)
 
 print('\n')
 print("Last three incidents:","\n")
+
+## Only get the last 3 incidents
 
 for value in range (0,3):
  print("Issues: ",end='')
